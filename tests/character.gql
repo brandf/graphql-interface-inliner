@@ -1,0 +1,24 @@
+interface Node {
+  id: ID!
+}
+
+interface Character {
+  name: String!
+  friends: [Character]
+  appearsIn: [Episode]!
+}
+
+type Human implements Node, Character {
+  starships: [Starship]
+  totalCredits: Int
+}
+
+type Droid implements Node, Character {
+  primaryFunction: String
+}
+
+type Starship implements Node {
+}
+
+type Episode implements Node {
+}

@@ -1,0 +1,89 @@
+interface INode {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+interface IHaveCapabilities {
+  capabilities: [Capability!]! @relation(name: "Capabilities")
+}
+
+interface ICanBeDescribed {
+  title: String!
+  description: String!
+  requiredToSee: Capability
+  requiredToDescribe: Capability
+}
+
+interface ICanComment {
+  commentedOn: [Comment!]! @relation(name: "SubjectOfComment")
+  requiredToComment: Capability
+}
+
+interface ISupportComments {
+  comments: [Comment!]! @relation(name: "ObjectOfComment")
+  requiredToCommentOn: Capability
+}
+
+interface IAmInGroups {
+  memberOf: [Group!]! @relation(name: "GroupMember")
+}
+
+interface ICanBeLocated {
+  location: ICanContain @relation(name: "LocationContains")
+  visited: [ICanContain!]! @relation(name: "Visits")
+  requiredToMove: Capability
+  requiredToContain: Capability
+}
+
+interface ICanContain {
+  contains: [ICanBeLocated!]! @relation(name: "LocationContains")
+  visitedBy: [ICanBeLocated!]! @relation(name: "Visits")
+  exits: [Portal!]! @relation(name: "SourceOfPortal")
+  entrances: [Portal!]! @relation(name: "DestinationOfPortal")
+  requiredToEnter: Capability
+}
+
+interface ICanReact {
+  reactedTo: [Reaction!]! @relation(name: "SubjectOfReaction")
+  requiredToReact: Capability
+}
+
+interface ISupportReactions {
+  reactions: [Reaction!]! @relation(name: "ObjectOfReaction")
+  requiredToReactOn: Capability
+}
+
+type Reaction implements INode {  
+  subject: ICanReact @relation(name: "SubjectOfReaction")
+  object: ISupportReactions @relation(name: "ObjectOfReaction")
+  emoji: String
+}
+
+type Comment implements INode, ISupportComments, ISupportReactions {
+  subject: ICanComment @relation(name: "SubjectOfComment")
+  object: ISupportComments @relation(name: "ObjectOfComment")
+  comment: String
+}
+
+type Capability implements INode, ICanBeDescribed, ISupportComments {
+  bearers: [IHaveCapabilities!]! @relation(name: "Capabilities")
+}
+
+type Group implements INode, ICanBeDescribed, IHaveCapabilities {
+  members: [IAmInGroups!]! @relation(name: "GroupMember")
+  requiredToJoin: Capability
+}
+
+type User implements INode, ICanBeDescribed, IHaveCapabilities, ICanComment, 
+                     ISupportComments, ICanReact, ISupportReactions, IAmInGroups {
+}
+
+type Object implements INode, ICanBeDescribed, ICanComment, ISupportComments, 
+                       ICanReact, ISupportReactions, IHaveCapabilities, 
+                       ICanBeLocated, ICanContain, IAmInGroups {
+}
+
+type Portal implements INode, ICanBeDescribed, ISupportComments, ISupportReactions {
+ 
+}
