@@ -2,9 +2,9 @@
   "name": "graphql-interface-inliner",
   "version": "1.0.1",
   "description": "inlines interface definitions into type definitions",
-  "main": "index.js",
+  "main": "bin/index.js",
   "bin": {
-    "graphql-interface-inliner": "./index.js"
+    "graphql-interface-inliner": "bin/index.js"
   },
   "scripts": {
     "test": "node index.js tests/mud.gql"
