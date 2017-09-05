@@ -1,6 +1,6 @@
 {
   "name": "graphql-interface-inliner",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "inlines interface definitions into type definitions",
   "main": "./index.js",
   "bin": {
