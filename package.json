@@ -1,6 +1,6 @@
 {
   "name": "graphql-interface-inliner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "inlines interface definitions into type definitions",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,10 @@
   },
   "author": "Brandon Furtwangler",
   "license": "MIT",
-  "repository"  : { "type" : "git", "url"  : "https://github.com/brandf/graphql-interface-inliner" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brandf/graphql-interface-inliner"
+  },
   "dependencies": {
     "clone": "^2.1.1",
     "commander": "^2.11.0",
