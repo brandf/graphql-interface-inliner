@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fs = require('fs');
 const util = require('util');
 const program = require('commander');
@@ -52,4 +54,5 @@ if (program.args && program.args.length === 1) {
     console.log(print(outast));
 } else {
     program.outputHelp();
+    process.exit(1);
 }

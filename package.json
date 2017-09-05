@@ -2,9 +2,9 @@
   "name": "graphql-interface-inliner",
   "version": "1.0.2",
   "description": "inlines interface definitions into type definitions",
-  "main": "bin/index.js",
+  "main": "./index.js",
   "bin": {
-    "graphql-interface-inliner": "bin/index.js"
+    "graphql-interface-inliner": "./index.js"
   },
   "scripts": {
     "test": "node index.js tests/mud.gql"
@@ -19,7 +19,6 @@
     "clone": "^2.1.1",
     "commander": "^2.11.0",
     "flatmap": "0.0.3",
-    "graphcool": "^1.2.1",
     "graphql": "^0.11.2"
   }
 }
